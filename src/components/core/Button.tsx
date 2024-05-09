@@ -1,9 +1,15 @@
+import classNames from "classnames";
+
 interface ButtonProps {
-  label: string;
+  children: string;
   onClick: () => void;
-  className: string;
+  className?: string;
 }
 
-export default function Button({ label, onClick, className }: ButtonProps) {
-  return <button className=""></button>;
+export default function Button({ children, onClick, className }: ButtonProps) {
+  return (
+    <button onClick={onClick} className={classNames("bg-primary hover:bg-primary/80 text-white px-4 py-1 rounded-md", className)}>
+      {children}
+    </button>
+  );
 }
