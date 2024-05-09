@@ -22,7 +22,7 @@ function Layout() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link className="text-red-400" to="/">Home</Link>
           </li>
           <li>
             <Link to="/check-name">Check Name</Link>
