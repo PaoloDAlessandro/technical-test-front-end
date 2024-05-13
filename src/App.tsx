@@ -19,18 +19,12 @@ export default function App() {
 function Layout() {
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link className="text-red-400" to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/check-name">Check Name</Link>
-          </li>
-          <li>
-            <Link to="/check-info">Check Info</Link>
-          </li>
-        </ul>
+      <nav className="h-14 flex flex-row items-center justify-center gap-x-10">
+        <Link to="/">Home</Link>
+
+        <Link to="/check-name">Check Name</Link>
+
+        <Link to="/check-info">Check Info</Link>
       </nav>
       <hr />
       <Outlet />
