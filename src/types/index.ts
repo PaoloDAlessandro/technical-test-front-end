@@ -1,7 +1,7 @@
 export type UserInfo = {
   name?: string;
   age?: number;
-  birthday?: Date;
+  birthday?: DateObject;
   married: boolean | null;
 };
 
@@ -15,4 +15,10 @@ export type UserInfoValidationErrors = {
 export type SelectOption = {
   value: string;
   label: string;
+};
+
+export type DateObject = {
+  day: number;
+  month: number;
+  year: number;
 };

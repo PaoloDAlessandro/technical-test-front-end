@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { validate } from "../api";
+import DatePicker from "../components/DatePicker";
 import Button from "../components/core/Button";
 import Input from "../components/core/Input";
-import { UserInfo, UserInfoValidationErrors } from "../types";
-import { formatBirthDay, parseDateString } from "../utils/formatter";
-import { BaseResponse, ValidationError } from "../interfaces";
-import { validate } from "../api";
 import Select from "../components/core/Select";
 import { marriedOptions } from "../data";
+import { BaseResponse, ValidationError } from "../interfaces";
+import { DateObject, UserInfo, UserInfoValidationErrors } from "../types";
 
 export default function CheckInfo() {
   const [response, setResponse] = useState<BaseResponse>();
@@ -39,10 +39,20 @@ export default function CheckInfo() {
 
     const marriedValue = formData.get("married");
 
+    const dayValue = formData.get("day") as string;
+    const monthValue = formData.get("month") as string;
+    const yearValue = formData.get("year") as string;
+
+    const birthday: DateObject = {
+      day: Number(dayValue),
+      month: Number(monthValue),
+      year: Number(yearValue),
+    };
+
     const data: UserInfo = {
       name: formData.get("name") as string,
       age: Number(formData.get("age") as string),
-      birthday: parseDateString(formData.get("birthday") as string),
+      birthday,
       married: marriedValue === "Select a option" ? null : marriedValue === "married",
     };
 
@@ -60,15 +70,7 @@ export default function CheckInfo() {
           <div className="flex flex-col gap-y-2">
             <Input type="text" name="name" label="Name" error={validationErrors?.name} />
             <Input type="number" name="age" label="Age" error={validationErrors?.age} />
-            <Input
-              type="text"
-              name="birthday"
-              label="Birthday"
-              placeholder="DD/MM/YYYY"
-              formatValue={formatBirthDay}
-              error={validationErrors?.birthday}
-              maxLength={10}
-            />
+            <DatePicker label="Birthday" error={validationErrors?.birthday} />
             <Select label="Married" placeholder="Select a option" name="married" options={marriedOptions} error={validationErrors?.married} />
           </div>
           <Button isLoading={isLoading} type="submit">

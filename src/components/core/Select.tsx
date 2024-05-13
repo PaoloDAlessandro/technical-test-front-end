@@ -19,7 +19,7 @@ export default function Select({ label, error, className, options, containerClas
   };
 
   return (
-    <div className={classNames("flex flex-col min-h-[70px]", containerClassName)}>
+    <div className={classNames("flex flex-col", { "min-h-[70px]": label }, containerClassName)}>
       {label && <label htmlFor={props["name"]}>{label}</label>}
       <select
         className={classNames(
